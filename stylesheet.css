@@ -9,6 +9,10 @@
     opacity: 0;
     pointer-events: none;
   }
+  html, body {
+    height:100%;
+    overflow-y:auto;
+  }
   body {
     font-family: system-ui, sans-serif;
     margin: 0;
@@ -152,49 +156,60 @@
   }
   
   .image-track {
-    width: 100%;
-    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    padding: 60px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
   }
   
   .image-list {
     display: flex;
-    justify-content: center;
-    gap: 36px;
-    padding: 0;
-    margin: 0 auto;
-    list-style: none;
-    max-width: 100%;
     flex-wrap: nowrap;
+    gap: 36px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: fit-content;
   }
   
   .image-slide {
     flex: 0 0 auto;
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 
+    opacity 0.5s ease, 
+    transform 0.5s ease, 
+    scale 0.5s ease;
+  opacity: 0;
+  transform: scale(0.75);
+  pointer-events: none;
   }
 
   .image-slide.center {
     opacity: 1;
-    transform: scale(1.05);
-    z-index: 2;
-    pointer-events: auto;
+  transform: scale(1.05);
+  z-index: 2;
+  pointer-events: auto;
       }
       
   .image-slide.adjacent {
     opacity: 0.1;
+    transform: scale(1);
     pointer-events: auto;
   }
-  
+  .image-slide.center,
+.image-slide.adjacent {
+  display: flex; /* only these will take up space */
+}
   .image-slide.center img {
     box-shadow:
-      0 0 0 2px rgba(255, 255, 255, 0.15),
-      0 8px 20px rgba(255, 255, 255, 0.08),
-      0 12px 32px rgba(217, 119, 6, 0.1);
+  0 0 0 2px rgba(255, 255, 255, 0.25),         /* Sharpened outer ring */
+  0 6px 12px rgba(255, 255, 255, 0.12),         /* Mid soft glow */
+  0 12px 24px rgba(217, 119, 6, 0.25);          /* Deeper orange glow for warmth */
     transition: box-shadow 0.3s ease;
   }
   
@@ -207,6 +222,11 @@
   .image-slide.center .custom-controls {
     opacity: 1;
     pointer-events: auto;
+  }
+
+  .image-slide:not(.center):not(.adjacent) {
+    visibility:hidden !important;
+    position: absolute;
   }
   
   .custom-controls {
@@ -243,7 +263,7 @@
   }
   
   .track-text {
-    padding: 15px;
+    padding-left: 14px;
   }
   
   .song-title {
@@ -257,14 +277,14 @@
   }
   
   .center-panel {
-    background: rgba(255, 255, 255, 0.03);
-    border-radius: 12px;
-    padding: 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 30px;
+    padding: 20px;
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
     box-shadow:
-      0 4px 10px rgba(0, 0, 0, 0.3),
-      inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    0 4px 12px rgba(255, 255, 255, 0.1),  /* soft white outer glow */
+    0 8px 24px rgba(173, 119, 205, 0.25);
   }
   
   i {
@@ -295,23 +315,43 @@
     color: var(--primary-color);
     letter-spacing: 0.15em;
     margin: 0;
+    padding:20px;
   }
   
   .label-tag,
   .label-sub {
     font-family: 'VT323', monospace;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     color: var(--accent-color);
     background-color: rgba(255, 255, 255, 0.04);
-    padding: 4px 20px;
-    border-radius: 4px;
+    padding-left:6px;
     display: inline-block;
-    margin-bottom: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
   }
   footer {
     padding:25px;
   }
+  .panel-head {
+    position: relative;
+  }
+  
+  .track-num {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 1rem;
+    color: var(--accent-color);
+    margin: 0;
+    pointer-events: none;
+    opacity: 55%;
+    font-family: 'Righteous', monospace;
+    font-style: italic;
+    text-align: right;
+  }
+
+
+
+

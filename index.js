@@ -19,28 +19,37 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
   
+function centerActiveSlide() {
+    const track = document.querySelector('.image-track');
+    const centerSlide = document.querySelector('.image-slide.center');
+    if (!track || !centerSlide) return;
+  
+    const scrollLeft = centerSlide.offsetLeft
+                     - (track.clientWidth / 2)
+                     + (centerSlide.clientWidth / 2);
+    track.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+  };
+  
+
 
 songImages = document.querySelectorAll('.image-slide');
 
 activeIndex = 2;
 
 
-function classUpdate (activeIndex){
-songImages.forEach((img, index) => {
-
-img.classList.remove('center','adjacent');
-
-if (index === activeIndex){
-    img.classList.add('center');
-
-} else if (Math.abs(index - activeIndex)=== 1){
-    img.classList.add('adjacent');
-};
-
-
-
-});
-};
+function classUpdate (activeIndex) {
+    songImages.forEach((img, index) => {
+      img.classList.remove('center', 'adjacent');
+  
+      if (index === activeIndex) {
+        img.classList.add('center');
+      } else if (Math.abs(index - activeIndex) === 1) {
+        img.classList.add('adjacent');
+      }
+    });
+  
+    centerActiveSlide(); // <-- Add this at the end
+  };
 
 songImages.forEach((img, i) => {
     img.addEventListener("click", () => {
