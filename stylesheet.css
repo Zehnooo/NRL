@@ -5,7 +5,10 @@
     --secondary-color: #a3a380;
     --accent-color: #AD77CD;
   }
-  
+  #site-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
   body {
     font-family: system-ui, sans-serif;
     margin: 0;
@@ -15,6 +18,126 @@
     user-select: none;
     overflow-x: hidden;
   }
+  #site-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  
+    display: flex;
+    justify-content: center; /* centers horizontally */
+    align-items: center;     /* centers vertically */
+  
+    background-color: var(--bg-color);
+    z-index: 5;
+  
+    font-family: 'Righteous', sans-serif;
+    letter-spacing: 3px;
+    font-size: 24px;
+  
+    transition: opacity 0.75s ease;
+    overflow: hidden;
+  }
+  #site-overlay svg path {
+    fill: var(--secondary-color); /* or any other variable or hex color */
+    transition: fill 0.5s ease, opacity 0.5s ease;
+    
+  }  
+  #site-overlay svg:hover path {
+    fill: var(--accent-color);
+  }
+
+  @keyframes slideUpAndOut {
+    0% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    20% {
+      transform: scale(0.85) translateY(-50vh);
+    }
+    100% {
+      transform: scale(0.25) translateY(-100vh);
+      opacity: 0;
+    }
+  }
+  #cassette-wrapper  {
+    display: block;             
+    will-change: transform;      
+    transform-origin: center center;
+    z-index: 10; /* Ensure it's on top while animating */
+
+  }
+  
+  #cassette-wrapper.animate-slide-up {
+    animation: slideUpAndOut 4.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+  #cassette-icon.accent-fill path {
+    fill: var(--accent-color);
+  }
+  @keyframes flashytext {
+    0%{
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  #opener-text {
+    opacity:1;
+    transition: opacity 1s ease;
+  }
+  #opener-text.fade-out {
+    opacity:0;
+  }
+  #opener-text.flash-animation {
+    animation: flashytext 2s linear infinite;
+  }
+ 
+
+  .overlay-container {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  }
+
+  #enter-site-button {
+    all: unset;
+    display: contents; /* Allows it to grow */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    border: none;
+    pointer-events: auto;
+    cursor: pointer;
+    overflow: visible; /* Just in case */
+  }
+  #enter-site-button svg {
+    height: 512px;
+    opacity: 0.35;
+    width: auto;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+  #enter-site-button svg path {
+    fill: var(--secondary-color);
+    transition: fill 0.5s ease;
+    pointer-events: auto;
+  }
+  
+  /* On hover: full opacity + accent fill */
+  #enter-site-button:hover svg {
+    opacity: 1;
+  }
+  
+  #enter-site-button:hover svg path {
+    fill: var(--accent-color);
+  }
+  
   
   img {
     width: 100%;
@@ -52,13 +175,12 @@
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
-  @-webkit-keyframes slide-fwd-center{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}100%{-webkit-transform:translateZ(160px);transform:translateZ(160px)}}@keyframes slide-fwd-center{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}100%{-webkit-transform:translateZ(160px);transform:translateZ(160px)}}
+
   .image-slide.center {
     opacity: 1;
     transform: scale(1.05);
     z-index: 2;
     pointer-events: auto;
-    -webkit-animation:slide-fwd-center .45s cubic-bezier(.25,.46,.45,.94) both;animation:slide-fwd-center .45s cubic-bezier(.25,.46,.45,.94) both
       }
       
   .image-slide.adjacent {

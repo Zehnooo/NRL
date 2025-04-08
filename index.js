@@ -1,3 +1,25 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const svgButton = document.getElementById('enter-site-button');
+    const overlay = document.getElementById('site-overlay');
+    const cassette = document.getElementById("cassette-wrapper");
+    const svg = document.getElementById('cassette-icon');
+    const openText = document.getElementById('opener-text');
+  
+    svgButton.addEventListener("click", function () {
+    cassette.classList.add('animate-slide-up');
+    
+    openText.classList.remove('flash-animation');
+    openText.classList.add('fade-out');
+    svg.classList.add('accent-fill');
+
+     setTimeout(() => {
+        overlay.classList.add("hidden"); // uses your working hidden class
+      }, 800);
+      
+    });
+  });
+  
+
 songImages = document.querySelectorAll('.image-slide');
 
 activeIndex = 2;
@@ -27,3 +49,4 @@ songImages.forEach((img, i) => {
 });
 
 classUpdate(2);
+
