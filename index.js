@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
      setTimeout(() => {
         overlay.classList.add("hidden"); // uses your working hidden class
-      }, 800);
+      }, 2000);
       
     });
   });
