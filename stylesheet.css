@@ -52,16 +52,17 @@
     pointer-events: none;
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
-  
+  @-webkit-keyframes slide-fwd-center{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}100%{-webkit-transform:translateZ(160px);transform:translateZ(160px)}}@keyframes slide-fwd-center{0%{-webkit-transform:translateZ(0);transform:translateZ(0)}100%{-webkit-transform:translateZ(160px);transform:translateZ(160px)}}
   .image-slide.center {
     opacity: 1;
     transform: scale(1.05);
     z-index: 2;
     pointer-events: auto;
-  }
-  
+    -webkit-animation:slide-fwd-center .45s cubic-bezier(.25,.46,.45,.94) both;animation:slide-fwd-center .45s cubic-bezier(.25,.46,.45,.94) both
+      }
+      
   .image-slide.adjacent {
-    opacity: 0.15;
+    opacity: 0.1;
     pointer-events: auto;
   }
   
@@ -73,14 +74,15 @@
     transition: box-shadow 0.3s ease;
   }
   
-  .image-slide audio,
   .image-slide .custom-controls {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
   }
   
-  .image-slide.center audio,
+ 
   .image-slide.center .custom-controls {
-    display: block;
+    opacity: 1;
+    pointer-events: auto;
   }
   
   .custom-controls {
@@ -93,6 +95,8 @@
     max-width: fit-content;
     margin: auto;
     padding: 6px;
+    opacity: 0;
+    transition: opacity 1s ease;
   }
   
   .button-effects {
@@ -184,4 +188,6 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
   }
-  
+  footer {
+    padding:25px;
+  }
