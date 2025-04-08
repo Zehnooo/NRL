@@ -1,0 +1,187 @@
+:root {
+    --bg-color: #1e1b18;
+    --text-color: #fefefe;
+    --primary-color: #d97706;
+    --secondary-color: #a3a380;
+    --accent-color: #AD77CD;
+  }
+  
+  body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    user-select: none;
+    overflow-x: hidden;
+  }
+  
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    -webkit-user-drag: none;
+  }
+  
+  .image-track {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .image-list {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+    max-width: 100%;
+    flex-wrap: nowrap;
+  }
+  
+  .image-slide {
+    flex: 0 0 auto;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .image-slide.center {
+    opacity: 1;
+    transform: scale(1.05);
+    z-index: 2;
+    pointer-events: auto;
+  }
+  
+  .image-slide.adjacent {
+    opacity: 0.15;
+    pointer-events: auto;
+  }
+  
+  .image-slide.center img {
+    box-shadow:
+      0 0 0 2px rgba(255, 255, 255, 0.15),
+      0 8px 20px rgba(255, 255, 255, 0.08),
+      0 12px 32px rgba(217, 119, 6, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .image-slide audio,
+  .image-slide .custom-controls {
+    display: none;
+  }
+  
+  .image-slide.center audio,
+  .image-slide.center .custom-controls {
+    display: block;
+  }
+  
+  .custom-controls {
+    border-radius: 8px;
+    background-color: #26231f;
+    box-shadow:
+      0 0 0 1px var(--secondary-color),
+      inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    max-width: fit-content;
+    margin: auto;
+    padding: 6px;
+  }
+  
+  .button-effects {
+    vertical-align: middle;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .button-effects:hover:not(.volume-slider) {
+    transform: scale(1.25);
+    opacity: 0.75;
+  }
+  
+  .volume-slider {
+    accent-color: var(--secondary-color);
+    opacity: 0.75;
+  }
+  
+  .volume-slider:hover {
+    accent-color: var(--accent-color);
+  }
+  
+  .track-text {
+    padding: 15px;
+  }
+  
+  .song-title {
+    color: var(--primary-color);
+    font-size: 1.75rem;
+  }
+  
+  .artist-list {
+    font-style: italic;
+    font-size: 1.25rem;
+  }
+  
+  .center-panel {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    padding: 24px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow:
+      0 4px 10px rgba(0, 0, 0, 0.3),
+      inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  }
+  
+  i {
+    font-size: 24px;
+    color: var(--secondary-color);
+    margin: 10px;
+  }
+  
+  i:hover {
+    color: var(--accent-color);
+  }
+  
+  .cassette-header {
+    text-align: center;
+    padding: 24px;
+    margin-bottom: 32px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+  
+  .artist-name {
+    font-family: 'Righteous', sans-serif;
+    font-size: 2.75rem;
+    color: var(--primary-color);
+    letter-spacing: 0.15em;
+    margin: 0;
+  }
+  
+  .label-tag,
+  .label-sub {
+    font-family: 'VT323', monospace;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.04);
+    padding: 4px 20px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+  
