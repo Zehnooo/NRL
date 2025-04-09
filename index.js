@@ -58,3 +58,19 @@ songImages.forEach((img, i) => {
 });
 
 classUpdate(2);
+
+document.addEventListener("DOMContentLoaded", function () {
+
+const flipButton = document.getElementById('flip-tape-button');
+const sideB = document.getElementById('cassette-side-b');
+const sideA = document.getElementById('cassette-side-a');
+
+
+flipButton.addEventListener("click", function (){
+sideB.classList.remove('hidden');
+sideA.classList.add('hidden');
+
+
+})
+
+});
