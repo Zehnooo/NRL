@@ -208,7 +208,6 @@
         <h1 class="artist-name">ELCY</h1>
         <div class="label-sub">EP.001 — FALL 2025</div>
       </header>
-      <div class="content-wrapper">
     <div class="side-b-wrapper">
       <section>
         <div class="header-text">
@@ -232,8 +231,7 @@
   </section>
     <footer class="page-footer">
       <div id="flip-tape-button">CLICK TO FLIP TAPE</div>
-    </footer>
-  </div>  
+    </footer>  
   </div>
 </div>
     </div>
@@ -251,3 +249,458 @@
 <i class="fab fa-instagram"></i>
 <i class="fab fa-tiktok"></i>
 -->
+
+:root {
+    --bg-color: #1e1b18;
+    --text-color: #fefefe;
+    --primary-color: #d97706;
+    --secondary-color: #a3a380;
+    --accent-color: #AD77CD;
+  }
+  #site-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  html, body {
+    height:100%;
+    overflow-y:auto;
+  }
+  body {
+    font-family: system-ui, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    user-select: none;
+    overflow-x: hidden;
+  }
+  #site-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  
+    display: flex;
+    justify-content: center; /* centers horizontally */
+    align-items: center;     /* centers vertically */
+  
+    background-color: var(--bg-color);
+    z-index: 5;
+  
+    transition: opacity 0.75s ease;
+    overflow: hidden;
+  }
+  #site-overlay svg path {
+    fill: var(--secondary-color); /* or any other variable or hex color */
+    transition: fill 0.5s ease, opacity 0.5s ease;
+    
+  }  
+  #site-overlay svg:hover path {
+    fill: var(--accent-color);
+  }
+
+  @keyframes slideUpAndOut {
+    0% {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+    20% {
+      transform: translateY(-50vh) scale(0.45) ;
+    }
+    100% {
+      transform: translateY(-100vh) scale(0.25);
+      opacity: 0;
+    }
+  }
+  #cassette-wrapper  {
+    display: block;             
+    will-change: transform;      
+    transform-origin: center center;
+    z-index: 10; /* Ensure it's on top while animating */
+    
+
+  }
+  
+  #cassette-wrapper.animate-slide-up {
+    animation: slideUpAndOut 6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  }
+  #cassette-icon.accent-fill path {
+    fill: var(--accent-color);
+  }
+  @keyframes flashytext {
+    0%{
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+  #opener-text {
+    opacity:1;
+    transition: opacity 1s ease;
+    padding:10px;
+    font-size:36px;
+    font-family: 'Righteous', sans-serif;
+    letter-spacing: 3px;
+  }
+  #opener-text.fade-out {
+    opacity:0;
+  }
+  #opener-text.flash-animation {
+    animation: flashytext 2s linear infinite;
+  }
+ 
+
+  .overlay-container {
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  }
+
+  #enter-site-button {
+    all: unset;
+    display: contents; /* Allows it to grow */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: transparent;
+    border: none;
+    pointer-events: auto;
+    cursor: pointer;
+    overflow: visible; /* Just in case */
+  }
+  #enter-site-button svg {
+   width: 600px;
+    
+    opacity: 0.35;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+    padding:25px;
+  }
+  #enter-site-button svg path {
+    fill: var(--secondary-color);
+    transition: fill 0.5s ease;
+    pointer-events: auto;
+  }
+  
+  /* On hover: full opacity + accent fill */
+  #enter-site-button:hover svg {
+    opacity: 1;
+  }
+  
+  #enter-site-button:hover svg path {
+    fill: var(--accent-color);
+  }
+  
+  
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    border-radius: 8px;
+    overflow: hidden;
+    -webkit-user-drag: none;
+  }
+  
+  .image-track {
+    display: flex;
+    justify-content: center;
+    padding: 60px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .image-list {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 36px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-width: fit-content;
+  }
+  
+  .image-slide {
+    flex: 0 0 auto;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 
+    opacity 0.5s ease, 
+    transform 0.5s ease, 
+    scale 0.5s ease;
+  opacity: 0;
+  transform: scale(0.75);
+  pointer-events: none;
+  }
+
+  .image-slide.center {
+    opacity: 1;
+  transform: scale(1.05);
+  z-index: 2;
+  pointer-events: auto;
+      }
+      
+  .image-slide.adjacent {
+    opacity: 0.1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+  .image-slide.center,
+.image-slide.adjacent {
+  display: flex; /* only these will take up space */
+}
+  .image-slide.center img {
+    box-shadow:
+  0 0 0 2px rgba(255, 255, 255, 0.25),         /* Sharpened outer ring */
+  0 6px 12px rgba(255, 255, 255, 0.12),         /* Mid soft glow */
+  0 12px 24px rgba(217, 119, 6, 0.25);          /* Deeper orange glow for warmth */
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .image-slide .custom-controls {
+    opacity: 0;
+    pointer-events: auto;
+  }
+  
+ 
+  .image-slide.center .custom-controls {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .image-slide:not(.center):not(.adjacent) {
+    visibility:hidden !important;
+    position: absolute;
+   
+  }
+  
+  .custom-controls {
+    border-radius: 8px;
+    background-color: #26231f;
+    box-shadow:
+      0 0 0 1px var(--secondary-color),
+      inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    max-width: fit-content;
+    margin: auto;
+    padding: 6px;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+  
+  .button-effects {
+    vertical-align: middle;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  
+  .button-effects:hover:not(.volume-slider) {
+    transform: scale(1.25);
+    opacity: 0.75;
+  }
+  
+  .volume-slider {
+    accent-color: var(--secondary-color);
+    opacity: 0.75;
+  }
+  
+  .volume-slider:hover {
+    accent-color: var(--accent-color);
+  }
+  
+  .track-text {
+    padding-left: 14px;
+  }
+  
+  .song-title {
+    color: var(--primary-color);
+    font-size: 1.75rem;
+  }
+  
+  .artist-list {
+    font-style: italic;
+    font-size: 1.25rem;
+  }
+  
+  .center-panel {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 30px;
+    padding: 20px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow:
+    0 4px 12px rgba(255, 255, 255, 0.1),  /* soft white outer glow */
+    0 8px 24px rgba(173, 119, 205, 0.25);
+  }
+  
+  i {
+    font-size: 24px;
+    color: var(--secondary-color);
+    margin: 10px;
+  }
+  
+  i:hover {
+    color: var(--accent-color);
+  }
+  
+  .cassette-header {
+    text-align: center;
+    padding: 24px;
+    margin-bottom: 32px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+  
+  .artist-name {
+    margin: 0;
+    padding:20px;
+  }
+  
+  .label-tag,
+  .label-sub {
+    font-family: 'VT323', monospace;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent-color);
+    background-color: rgba(255, 255, 255, 0.04);
+    padding-left:6px;
+    display: inline-block;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+  }
+  .page-footer {
+    padding:25px;
+    text-align: center;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    justify-content: center;
+  }
+  .panel-head {
+    position: relative;
+  }
+  
+  .track-num {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    font-size: 1rem;
+    color: var(--accent-color);
+    margin: 0;
+    pointer-events: none;
+    opacity: 75%;
+    font-family: 'Righteous', monospace;
+    font-style: italic;
+    text-align: right;
+    -webkit-text-stroke-width: .25px;
+    -webkit-text-stroke-color: var(--secondary-color);
+
+  }
+  #flip-tape-button {
+    animation: flashytext 2s linear infinite;
+    opacity:1;
+    transition: opacity 1s ease;
+    padding:10px;
+    font-size:36px;
+    font-family: 'Righteous', sans-serif;
+    letter-spacing: 3px;
+    pointer-events: all;
+    cursor: pointer;
+    width: max-content;
+    margin:auto;
+  }
+
+ .hidden {
+ display:none ;
+ }
+ .flip-container {
+  perspective: 1500px;
+  width: 100%;
+  height: 100vh; /* or whatever height you want the cassette to take */
+  position: relative;
+  overflow: hidden;
+}
+.flip-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1.5s ease;
+}
+.flipped {
+  transform: rotateY(180deg);
+}
+.side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
+.side-a {
+  transform: rotateY(0deg);
+}
+
+.side-b {
+  transform: rotateY(180deg);
+  overflow-y: auto; /* or scroll */
+
+}
+.artist-content {
+  display:flex;
+}
+
+.meet-the-artist {
+  padding:8px;
+  width:60%;
+}
+.meet-the-artist img {
+  width: 100%;
+  height: auto;
+  border-radius: 50px;
+  border: 2px solid var(--secondary-color);
+}
+h1 {
+  font-family: 'Righteous', sans-serif;
+  font-size: 2.75rem;
+  color: var(--primary-color);
+  letter-spacing: 0.15em;
+}
+h2 {
+  font-family: 'Righteous', sans-serif;
+  font-size: 1.5rem;
+  color: var(--secondary-color);
+  letter-spacing: 0.15em;
+}
+.artist-about-text {
+  font-size: 1rem;
+  color: var(--secondary-color);
+  letter-spacing: 0.15em;
+}
+
+.cassette-side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  transition: transform 0.8s ease;
+}
