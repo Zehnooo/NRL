@@ -36,10 +36,6 @@
     background-color: var(--bg-color);
     z-index: 5;
   
-    font-family: 'Righteous', sans-serif;
-    letter-spacing: 3px;
-    font-size: 24px;
-  
     transition: opacity 0.75s ease;
     overflow: hidden;
   }
@@ -91,6 +87,10 @@
   #opener-text {
     opacity:1;
     transition: opacity 1s ease;
+    padding:10px;
+    font-size:36px;
+    font-family: 'Righteous', sans-serif;
+    letter-spacing: 3px;
   }
   #opener-text.fade-out {
     opacity:0;
@@ -122,9 +122,9 @@
     overflow: visible; /* Just in case */
   }
   #enter-site-button svg {
-    height: 360px;
+   width: 600px;
+    
     opacity: 0.35;
-    width: auto;
     transition: opacity 0.5s ease;
     pointer-events: none;
     padding:25px;
@@ -331,8 +331,18 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
   }
-  footer {
+  .social-footer {
     padding:25px;
+    text-align: center;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    
   }
   .panel-head {
     position: relative;
@@ -351,7 +361,10 @@
     font-style: italic;
     text-align: right;
   }
-
+.footer-wrapper{
+  display:flex;
+  justify-content: center;
+}
 
 
 

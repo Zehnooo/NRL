@@ -58,4 +58,3 @@ songImages.forEach((img, i) => {
 });
 
 classUpdate(2);
-
