@@ -35,11 +35,16 @@ function centerActiveSlide() {
   const centerSlide = document.querySelector('.image-slide.center');
   if (!track || !centerSlide) return;
 
-  const scrollLeft = centerSlide.offsetLeft 
-                   - (track.clientWidth / 2) 
-                   + (centerSlide.clientWidth / 2);
-
-  track.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+  requestAnimationFrame(() => {
+    const trackRect = track.getBoundingClientRect();
+    const slideRect = centerSlide.getBoundingClientRect();
+    const scrollLeft = track.scrollLeft + (slideRect.left - trackRect.left) - (track.clientWidth / 2 - centerSlide.clientWidth / 2);
+    
+    // Slight delay ensures smoother behavior on class changes
+    setTimeout(() => {
+      track.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+    }, 25);
+  });
 }
 
 songImages = document.querySelectorAll('.image-slide');
