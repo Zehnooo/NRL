@@ -19,37 +19,64 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
   
+// function centerActiveSlide() {
+//    const track = document.querySelector('.image-track');
+//    const centerSlide = document.querySelector('.image-slide.center');
+//    if (!track || !centerSlide) return;
+//  
+//    const scrollLeft = centerSlide.offsetLeft
+//                     - (track.clientWidth / 2)
+//                     + (centerSlide.clientWidth / 2);
+//    track.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+//  };
+  
 function centerActiveSlide() {
-    const track = document.querySelector('.image-track');
-    const centerSlide = document.querySelector('.image-slide.center');
-    if (!track || !centerSlide) return;
-  
-    const scrollLeft = centerSlide.offsetLeft
-                     - (track.clientWidth / 2)
-                     + (centerSlide.clientWidth / 2);
-    track.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-  };
-  
+  const track = document.querySelector('.image-track');
+  const centerSlide = document.querySelector('.image-slide.center');
+  if (!track || !centerSlide) return;
 
+  const scrollLeft = centerSlide.offsetLeft 
+                   - (track.clientWidth / 2) 
+                   + (centerSlide.clientWidth / 2);
+
+  track.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+}
 
 songImages = document.querySelectorAll('.image-slide');
 
 activeIndex = 2;
 
 
-function classUpdate (activeIndex) {
-    songImages.forEach((img, index) => {
-      img.classList.remove('center', 'adjacent');
+// function classUpdate (activeIndex) {
+//    songImages.forEach((img, index) => {
+//      img.classList.remove('center', 'adjacent');
+//  
+//      if (index === activeIndex) {
+//        img.classList.add('center');
+//      } else if (Math.abs(index - activeIndex) === 1) {
+//        img.classList.add('adjacent');
+//      }
+//   });
   
-      if (index === activeIndex) {
-        img.classList.add('center');
-      } else if (Math.abs(index - activeIndex) === 1) {
-        img.classList.add('adjacent');
+//    centerActiveSlide(); 
+//  };
+
+  function classUpdate(activeIndex) {
+    songImages.forEach((img, index) => {
+      const isCenter = index === activeIndex;
+      const isAdjacent = Math.abs(index - activeIndex) === 1;
+  
+      img.classList.toggle('center', isCenter);
+      img.classList.toggle('adjacent', isAdjacent);
+  
+      // Remove both if not center or adjacent
+      if (!isCenter && !isAdjacent) {
+        img.classList.remove('center', 'adjacent');
       }
     });
   
-    centerActiveSlide(); // <-- Add this at the end
-  };
+    centerActiveSlide();
+  }
 
 songImages.forEach((img, i) => {
     img.addEventListener("click", () => {
@@ -63,11 +90,17 @@ window.scrollTo({ top: 0, behavior: 'smooth' });
 document.addEventListener("DOMContentLoaded", function () {
   const flipButton = document.getElementById('flip-tape-button');
   const flipInner = document.querySelector('.flip-inner');
+  const scrollers = document.getElementById('scroll-arrows');
 
   flipButton.addEventListener('click', () => {
     flipInner.classList.toggle('flipped');
+    scrollers.classList.add('scroll-cue-hidden');
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
+
+    setTimeout(()=> {
+      scrollers.classList.remove('scroll-cue-hidden');
+    },1000);
+    });
   });
-});

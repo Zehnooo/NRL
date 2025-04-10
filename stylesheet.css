@@ -4,6 +4,7 @@
     --primary-color: #d97706;
     --secondary-color: #a3a380;
     --accent-color: #AD77CD;
+    --arrow-glow: rgba(173, 119, 205, 0.65);
   }
   #site-overlay.hidden {
     opacity: 0;
@@ -159,9 +160,13 @@
   .image-track {
     display: flex;
     justify-content: center;
-    padding: 60px 0;
-    overflow-x: auto;
+    align-items: center;
+    padding: 0 calc(50vw - 150px);
+    box-sizing: content-box; 
+    margin:0;
+    overflow-x: hidden;
     overflow-y: auto;
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
   
@@ -172,19 +177,19 @@
     list-style: none;
     padding: 0;
     margin: 0;
-    min-width: fit-content;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+    width: max-content;
   }
   
   .image-slide {
-    flex: 0 0 auto;
+    flex: 0 0 300px;
+    transition: all 0.6s ease;
   width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: 
-    opacity 0.5s ease, 
-    transform 0.5s ease, 
-    scale 0.5s ease;
   opacity: 0;
   transform: scale(0.75);
   pointer-events: none;
@@ -227,7 +232,9 @@
 
   .image-slide:not(.center):not(.adjacent) {
     visibility:hidden !important;
-    position: absolute;
+    opacity: 0;
+    transform:scale(0.75);
+    pointer-events: none;
    
   }
   
@@ -410,6 +417,10 @@
   left: 0;
   width: 100%;
   height: 100%; 
+  flex-direction: column;
+  display:flex;
+  justify-content: flex-start;
+  min-height: 100vh;
 }
 
 .side-b {
@@ -417,9 +428,17 @@
   overflow-y: auto;
 
 }
+.side-b-wrapper {
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  box-shadow: 0 0 20px rgba(173, 119, 205, 0.15);
+  padding: 40px;
+  background: rgba(0,0,0,0.05);
+}
 .artist-content {
   display:flex;
   margin-top:-5px;
+  margin-bottom: 64px;
 }
 .artist-header {
   display: inline;
@@ -432,12 +451,23 @@
   width:95%;
   display: inline;
   margin-top:30px;
+  max-width: 550px;
+  margin-left:40px;
 }
 .artist-header img {
   width: 400px;
   height: auto;
   border-radius: 50px;
   border: 2px solid var(--secondary-color);
+  box-shadow: 
+  0 0 0 2px var(--secondary-color),
+  0 10px 25px rgba(0,0,0,0.4),
+  0 0 12px var(--accent-color);
+}
+.artist-header img:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 .meet-the-artist h2 {
 font-size: 48px;
@@ -474,7 +504,7 @@ h2 {
 .content-wrapper {
   max-width: 1200px;
   margin: auto;
-  padding: 24px;
+  padding: 10px;
 }
 .main-wrapper {
     display: flex;
@@ -483,7 +513,7 @@ h2 {
 }
 .header-text {
   text-align: center;
-  padding-bottom:20px;
+  margin-bottom: 48px;
   max-height: fit-content;
   display: block;
   margin: 0 auto;
@@ -491,17 +521,31 @@ h2 {
 .social-bar {
 display: flex;
 gap: 35px;
-width: 100%;
+width: fit-content;
 font-size: 4rem;
 justify-content: center;
 padding:40px;
-margin:auto;
+margin:0 auto;
+margin-top:80px;
+background: rgba(255, 255, 255, 0.025);
+padding: 20px 30px;
+border-radius: 30px;
+border: 1px solid rgba(255,255,255,0.1);
+box-shadow: inset 0 0 12px rgba(173, 119, 205, 0.15);
+overflow-y:hidden;
+}
+.social-bar i {
+  transition: 
+  transform 2s ease,
+  opacity 0.3s ease;
+opacity: 0.85;
 }
 .social-bar i:hover {
-  animation-delay: .3s;
-  animation: fa-bounce 1s ease infinite;
+  animation: fa-bounce 1s ease-in infinite, transform 2s ease;
+  --fa-bounce-height:-18px;
   transform: translateY(-5px) scale(1.05); 
   opacity:1;
+  --fa-animation-delay: 1s;
 }
 
 hr {
@@ -519,4 +563,48 @@ hr {
   box-shadow:
     0 0 4px var(--accent-color),
     0 0 8px var(--primary-color);
+}
+.scroll-cue {
+  position: fixed;
+  left: 36px;
+  right: 36px;
+  bottom: 150px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  text-shadow:
+    0 0 6px var(--arrow-glow),
+    0 0 12px var(--arrow-glow),
+    0 0 18px var(--arrow-glow);
+  z-index: 4;
+  cursor: default;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.scroll-cue span {
+  display: inline-block;
+  transform: translateY(0);
+  animation: pulse-down 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-down {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.scroll-cue:hover {
+  opacity: 1;
+}
+
+.scroll-cue-hidden {
+  opacity:0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
