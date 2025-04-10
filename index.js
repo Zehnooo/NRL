@@ -58,12 +58,16 @@ songImages.forEach((img, i) => {
 });
 
 classUpdate(2);
+window.scrollTo({ top: 0, behavior: 'smooth' });
 
 document.addEventListener("DOMContentLoaded", function () {
   const flipButton = document.getElementById('flip-tape-button');
   const flipInner = document.querySelector('.flip-inner');
 
   flipButton.addEventListener('click', () => {
-    flipInner.classList.add('flipped');
+    flipInner.classList.toggle('flipped');
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
   });
 });

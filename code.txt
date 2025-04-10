@@ -29,15 +29,18 @@
         <div id="opener-text" class="flash-animation">CLICK TO INSERT TAPE</div>
       </div>
     </div>
+    <div class="main-container">
     <div class="flip-container">
     <div class="flip-inner">
     <div id="cassette-side-a" class='cassette-side side-a side'>
     <div id="cassette-wrapper">
     </div>
     <header class="cassette-header">
+        <div class="header-wrapper">
       <div class="label-tag">SIDE A</div>
       <h1 class="artist-name">ELCY</h1>
       <div class="label-sub">EP.001 — FALL 2025</div>
+    </div>
     </header>
 
     <div class="content-wrapper">
@@ -196,10 +199,7 @@
             </li>
           </ul>
         </div>
-      </section>
-      <footer class="page-footer">
-        <div id="flip-tape-button">CLICK TO FLIP TAPE</div>
-      </footer>   
+      </section> 
     </div>
     </div>
     <div id="cassette-side-b" class="cassette-side side-b side">
@@ -208,47 +208,47 @@
         <h1 class="artist-name">ELCY</h1>
         <div class="label-sub">EP.001 — FALL 2025</div>
       </header>
+      <div class="content-wrapper">
     <div class="side-b-wrapper">
       <section>
         <div class="header-text">
         <h1 class="meet-header">MEET THE ARTIST</h1>
-        <br>
+        <hr>
       </div>
       <div class="artist-content">
-      <div class="meet-the-artist">
+        <div class="artist-header">
         <img src="/assets/profilepic.jpg">
-      
-        
+        </div>
+      <div class="meet-the-artist">
         <h2 class="artist-show-name">ELCY</h2>
-        <h2 class="artist-real-name">LOGAN</h2>
-        <div class="about-the-artist">
-          <h1 class="about-header">ABOUT THE ARTIST</h1>
         <p class="artist-about-text">Emerging from the underground scene with a sound that blends nostalgic textures and modern rhythms, [Artist Name] is a genre-defying musician crafting immersive sonic experiences. With roots in lo-fi, synthwave, and alternative hip-hop, their tracks channel the warmth of analog tape and the grit of late-night city drives. Drawing inspiration from personal stories, cassette-era vibes, and a relentless DIY ethic, [Artist Name] invites listeners into a world where every beat tells a story, and every lyric echoes with intention. Stay tuned</p>
       </div>
+      </div>
+      <div class="social-bar">
+        <i class="fab fa-spotify"></i>
+        <i class="fab fa-apple"></i>
+        <i class="fab fa-soundcloud"></i>
+        <i class="fab fa-x-twitter"></i>
+        <i class="fab fa-youtube"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-tiktok"></i>
       </div>
     </div>
     </div>
   </section>
-    <footer class="page-footer">
-      <div id="flip-tape-button">CLICK TO FLIP TAPE</div>
-    </footer>  
+    
+  </div>  
   </div>
 </div>
     </div>
+    <footer class="page-footer">
+        <div id="flip-tape-button">CLICK TO FLIP TAPE</div>
+      </footer>
+      </div>
     <script src="index.js"></script>
   </body>
 </html>
 
-
-<!-- Social icons 
-<i class="fab fa-spotify"></i>
-<i class="fab fa-apple"></i>
-<i class="fab fa-soundcloud"></i>
-<i class="fab fa-x-twitter"></i>
-<i class="fab fa-youtube"></i>
-<i class="fab fa-instagram"></i>
-<i class="fab fa-tiktok"></i>
--->
 
 :root {
     --bg-color: #1e1b18;
@@ -262,8 +262,9 @@
     pointer-events: none;
   }
   html, body {
-    height:100%;
-    overflow-y:auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   body {
     font-family: system-ui, sans-serif;
@@ -272,7 +273,7 @@
     background-color: var(--bg-color);
     color: var(--text-color);
     user-select: none;
-    overflow-x: hidden;
+    overflow-x: auto;
   }
   #site-overlay {
     position: fixed;
@@ -403,7 +404,7 @@
     object-fit: cover;
     display: block;
     border-radius: 8px;
-    overflow: hidden;
+    overflow: auto;
     -webkit-user-drag: none;
   }
   
@@ -412,7 +413,7 @@
     justify-content: center;
     padding: 60px 0;
     overflow-x: auto;
-    overflow-y: hidden;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
   
@@ -540,7 +541,7 @@
     0 8px 24px rgba(173, 119, 205, 0.25);
   }
   
-  i {
+  .custom-controls i {
     font-size: 24px;
     color: var(--secondary-color);
     margin: 10px;
@@ -561,7 +562,6 @@
     -webkit-backdrop-filter: blur(4px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
   }
-  
   .artist-name {
     margin: 0;
     padding:20px;
@@ -591,6 +591,7 @@
     -webkit-backdrop-filter: blur(4px);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     justify-content: center;
+    position: relative;
   }
   .panel-head {
     position: relative;
@@ -630,18 +631,17 @@
  display:none ;
  }
  .flip-container {
-  perspective: 1500px;
-  width: 100%;
-  height: 100vh; /* or whatever height you want the cassette to take */
   position: relative;
-  overflow: hidden;
+  width: 100%;
+  min-height: 100vh; /* ✅ allows growth */
+  perspective: 1000px;
 }
 .flip-inner {
   width: 100%;
-  height: 100%;
-  position: relative;
+  min-height: 100vh; /* ✅ lets sides grow */
   transform-style: preserve-3d;
-  transition: transform 1.5s ease;
+  transition: transform 0.8s;
+  position: relative;
 }
 .flipped {
   transform: rotateY(180deg);
@@ -649,33 +649,50 @@
 .side {
   position: absolute;
   width: 100%;
-  height: 100%;
+  min-height: 100vh; /* ✅ lets side grow with content */
   top: 0;
   left: 0;
   backface-visibility: hidden;
 }
 .side-a {
   transform: rotateY(0deg);
+  overflow-y: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
 }
 
 .side-b {
   transform: rotateY(180deg);
-  overflow-y: auto; /* or scroll */
+  overflow-y: auto;
 
 }
 .artist-content {
   display:flex;
+  margin-top:-5px;
+}
+.artist-header {
+  display: inline;
+  width: min-content;
+  padding: 20px;
 }
 
 .meet-the-artist {
-  padding:8px;
-  width:60%;
+  padding: 20px;
+  width:95%;
+  display: inline;
+  margin-top:30px;
 }
-.meet-the-artist img {
-  width: 100%;
+.artist-header img {
+  width: 400px;
   height: auto;
   border-radius: 50px;
   border: 2px solid var(--secondary-color);
+}
+.meet-the-artist h2 {
+font-size: 48px;
 }
 h1 {
   font-family: 'Righteous', sans-serif;
@@ -691,16 +708,68 @@ h2 {
 }
 .artist-about-text {
   font-size: 1rem;
-  color: var(--secondary-color);
+  color: var(--text-color);
   letter-spacing: 0.15em;
 }
 
 .cassette-side {
-  position: absolute;
+    position: absolute;
   width: 100%;
   height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  backface-visibility: hidden;
   top: 0;
   left: 0;
-  backface-visibility: hidden;
-  transition: transform 0.8s ease;
 }
+
+.content-wrapper {
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px;
+}
+.main-wrapper {
+    display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.header-text {
+  text-align: center;
+  padding-bottom:20px;
+  max-height: fit-content;
+  display: inline;
+}
+.social-bar {
+display: flex;
+gap: 35px;
+width: 100%;
+font-size: 4rem;
+justify-content: center;
+padding:40px;
+margin:auto;
+}
+.social-bar i:hover {
+  animation-delay: .3s;
+  animation: fa-bounce 1s ease infinite;
+  transform: translateY(-5px) scale(1.05); 
+  opacity:1;
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--accent-color),
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  margin: 48px auto;
+  max-width: 650px;
+  opacity: 0.75;
+  box-shadow:
+    0 0 4px var(--accent-color),
+    0 0 8px var(--primary-color);
+}
+
+
