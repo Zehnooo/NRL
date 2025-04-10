@@ -207,6 +207,7 @@
     transform: scale(1);
     pointer-events: auto;
   }
+
   .image-slide.center,
 .image-slide.adjacent {
   display: flex; /* only these will take up space */
@@ -553,12 +554,11 @@ hr {
     var(--primary-color),
     var(--secondary-color)
   );
-  margin: 48px auto;
-  max-width: 650px;
   opacity: 0.75;
   box-shadow:
     0 0 4px var(--accent-color),
     0 0 8px var(--primary-color);
+   
 }
 .scroll-cue {
   position: fixed;
@@ -603,4 +603,7 @@ hr {
   opacity:0;
   pointer-events: none;
   transition: opacity 0.3s ease;
+}
+.front-hr {
+  margin:20px auto;
 }
