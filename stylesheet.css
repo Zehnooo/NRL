@@ -417,7 +417,8 @@
 
 .meet-the-artist {
   padding:8px;
-  width:60%;
+  width:95%;
+  display:flex;
 }
 .meet-the-artist img {
   width: 100%;
