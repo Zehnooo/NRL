@@ -30,6 +30,10 @@
       </div>
     </div>
     <div class="main-container">
+      <div class="scroll-cue" id="scroll-arrows">
+        <span>&#x25BC;</span>
+        <span>&#x25BC;</span>
+      </div>
     <div class="flip-container">
     <div class="flip-inner">
     <div id="cassette-side-a" class='cassette-side side-a side'>
@@ -45,8 +49,11 @@
 
     <div class="content-wrapper">
       <section id="image-carousel">
+        <h1 style="text-align: center;">TRACK SELECTOR</h1>
+        <hr class="front-hr">
         <div class="image-track">
           <ul class="image-list">
+            <li class="image-slide dummy"></li>
             <li class="image-slide">
               <div class="center-panel">
                 <div class="panel-head">
@@ -197,10 +204,15 @@
                 </div>
               </div>
             </li>
+            <li class="image-slide dummy"></li>
           </ul>
         </div>
+        <hr class="front-hr">
       </section> 
     </div>
+    <footer class="page-footer" id="footer-a">
+      <div id="flip-a">CLICK TO FLIP TAPE</div>
+    </footer>
     </div>
     <div id="cassette-side-b" class="cassette-side side-b side">
       <header class="cassette-header">
@@ -213,7 +225,7 @@
       <section>
         <div class="header-text">
         <h1 class="meet-header">MEET THE ARTIST</h1>
-        <hr>
+        <hr class="back-hr">
       </div>
       <div class="artist-content">
         <div class="artist-header">
@@ -223,32 +235,33 @@
         <h2 class="artist-show-name">ELCY</h2>
         <p class="artist-about-text">Emerging from the underground scene with a sound that blends nostalgic textures and modern rhythms, [Artist Name] is a genre-defying musician crafting immersive sonic experiences. With roots in lo-fi, synthwave, and alternative hip-hop, their tracks channel the warmth of analog tape and the grit of late-night city drives. Drawing inspiration from personal stories, cassette-era vibes, and a relentless DIY ethic, [Artist Name] invites listeners into a world where every beat tells a story, and every lyric echoes with intention. Stay tuned</p>
       </div>
+   
       </div>
-      <div class="social-bar">
-        <i class="fab fa-spotify"></i>
-        <i class="fab fa-apple"></i>
-        <i class="fab fa-soundcloud"></i>
-        <i class="fab fa-x-twitter"></i>
-        <i class="fab fa-youtube"></i>
-        <i class="fab fa-instagram"></i>
-        <i class="fab fa-tiktok"></i>
-      </div>
+  
     </div>
     </div>
   </section>
-    
+  <div class="social-bar">
+    <i class="fab fa-spotify"></i>
+    <i class="fab fa-apple"></i>
+    <i class="fab fa-soundcloud"></i>
+    <i class="fab fa-x-twitter"></i>
+    <i class="fab fa-youtube"></i>
+    <i class="fab fa-instagram"></i>
+    <i class="fab fa-tiktok"></i>
+  </div>
   </div>  
   </div>
+  
 </div>
     </div>
-    <footer class="page-footer">
-        <div id="flip-tape-button">CLICK TO FLIP TAPE</div>
+    <footer class="page-footer" id="footer-b">
+        <div id="flip-b">CLICK TO FLIP TAPE</div>
       </footer>
       </div>
     <script src="index.js"></script>
   </body>
 </html>
-
 
 :root {
     --bg-color: #1e1b18;
@@ -256,14 +269,18 @@
     --primary-color: #d97706;
     --secondary-color: #a3a380;
     --accent-color: #AD77CD;
+    --arrow-glow: rgba(173, 119, 205, 0.65);
   }
   #site-overlay.hidden {
     opacity: 0;
     pointer-events: none;
   }
+  * {
+    
+  }
   html, body {
     min-height: 100%;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
     overflow-y: auto;
   }
   body {
@@ -407,39 +424,60 @@
     overflow: auto;
     -webkit-user-drag: none;
   }
+  .image-track::-webkit-scrollbar {
+    display: none;
+  }
   
   .image-track {
     display: flex;
     justify-content: center;
-    padding: 60px 0;
-    overflow-x: auto;
-    overflow-y: auto;
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 16px;
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+    position: relative;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding-bottom: 40px;
+    padding-top:40px;
   }
   
   .image-list {
     display: flex;
     flex-wrap: nowrap;
-    gap: 36px;
+    gap: 24px;
     list-style: none;
     padding: 0;
-    margin: 0;
-    min-width: fit-content;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    
   }
   
   .image-slide {
     flex: 0 0 auto;
-  width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: 
-    opacity 0.5s ease, 
-    transform 0.5s ease, 
-    scale 0.5s ease;
-  opacity: 0;
-  transform: scale(0.75);
-  pointer-events: none;
+    transition: all 0.6s ease;
+    width: 300px;
+    max-width: 90vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: scale(0.75);
+    pointer-events: none;
+    padding: 0;
+    box-sizing: border-box;
+ 
   }
 
   .image-slide.center {
@@ -447,6 +485,8 @@
   transform: scale(1.05);
   z-index: 2;
   pointer-events: auto;
+  max-width: 100%;
+ 
       }
       
   .image-slide.adjacent {
@@ -454,6 +494,7 @@
     transform: scale(1);
     pointer-events: auto;
   }
+
   .image-slide.center,
 .image-slide.adjacent {
   display: flex; /* only these will take up space */
@@ -478,9 +519,11 @@
   }
 
   .image-slide:not(.center):not(.adjacent) {
-    visibility:hidden !important;
+    visibility: hidden !important;
+    opacity: 0;
+    transform: scale(0.75);
+    pointer-events: none;
     position: absolute;
-   
   }
   
   .custom-controls {
@@ -580,19 +623,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
   }
-  .page-footer {
-    padding:25px;
-    text-align: center;
-    padding: 24px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 2px solid var(--secondary-color);
-    border-radius: 10px;
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-    justify-content: center;
-    position: relative;
-  }
+
   .panel-head {
     position: relative;
   }
@@ -613,7 +644,7 @@
     -webkit-text-stroke-color: var(--secondary-color);
 
   }
-  #flip-tape-button {
+  #footer-a, #footer-b {
     animation: flashytext 2s linear infinite;
     opacity:1;
     transition: opacity 1s ease;
@@ -625,6 +656,19 @@
     cursor: pointer;
     width: max-content;
     margin:auto;
+  }
+  .page-footer {
+    padding:25px;
+    text-align: center;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    position: relative;
   }
 
  .hidden {
@@ -649,10 +693,13 @@
 .side {
   position: absolute;
   width: 100%;
-  min-height: 100vh; /* ✅ lets side grow with content */
+  min-height: 100vh;
+  height: auto; /* ✅ Allow height to grow with content */
   top: 0;
   left: 0;
   backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .side-a {
   transform: rotateY(0deg);
@@ -661,7 +708,10 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%; 
+  flex-direction: column;
+  display:flex;
+  justify-content: flex-start;
+  min-height: 100vh;
 }
 
 .side-b {
@@ -669,9 +719,17 @@
   overflow-y: auto;
 
 }
+.side-b-wrapper {
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  box-shadow: 0 0 20px rgba(173, 119, 205, 0.15);
+  padding: 40px;
+  background: rgba(0,0,0,0.05);
+}
 .artist-content {
   display:flex;
   margin-top:-5px;
+  margin-bottom: 64px;
 }
 .artist-header {
   display: inline;
@@ -684,12 +742,23 @@
   width:95%;
   display: inline;
   margin-top:30px;
+  max-width: 550px;
+  margin-left:40px;
 }
 .artist-header img {
   width: 400px;
   height: auto;
   border-radius: 50px;
   border: 2px solid var(--secondary-color);
+  box-shadow: 
+  0 0 0 2px var(--secondary-color),
+  0 10px 25px rgba(0,0,0,0.4),
+  0 0 12px var(--accent-color);
+}
+.artist-header img:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 .meet-the-artist h2 {
 font-size: 48px;
@@ -713,20 +782,23 @@ h2 {
 }
 
 .cassette-side {
-    position: absolute;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   backface-visibility: hidden;
-  top: 0;
-  left: 0;
+
+  display: flex;
+  flex-direction: column;
 }
 
 .content-wrapper {
   max-width: 1200px;
   margin: auto;
-  padding: 24px;
+  padding: 10px;
 }
 .main-wrapper {
     display: flex;
@@ -735,24 +807,39 @@ h2 {
 }
 .header-text {
   text-align: center;
-  padding-bottom:20px;
+  margin-bottom: 48px;
   max-height: fit-content;
-  display: inline;
+  display: block;
+  margin: 0 auto;
 }
 .social-bar {
 display: flex;
 gap: 35px;
-width: 100%;
+width: fit-content;
 font-size: 4rem;
 justify-content: center;
 padding:40px;
-margin:auto;
+margin:0 auto;
+margin-top:80px;
+background: rgba(255, 255, 255, 0.025);
+padding: 20px 30px;
+border-radius: 30px;
+border: 1px solid rgba(255,255,255,0.1);
+box-shadow: inset 0 0 12px rgba(173, 119, 205, 0.15);
+overflow-y:hidden;
+}
+.social-bar i {
+  transition: 
+  transform 2s ease,
+  opacity 0.3s ease;
+opacity: 0.85;
 }
 .social-bar i:hover {
-  animation-delay: .3s;
-  animation: fa-bounce 1s ease infinite;
+  animation: fa-bounce 1s ease-in infinite, transform 2s ease;
+  --fa-bounce-height:-18px;
   transform: translateY(-5px) scale(1.05); 
   opacity:1;
+  --fa-animation-delay: 1s;
 }
 
 hr {
@@ -764,12 +851,92 @@ hr {
     var(--primary-color),
     var(--secondary-color)
   );
-  margin: 48px auto;
-  max-width: 650px;
   opacity: 0.75;
   box-shadow:
     0 0 4px var(--accent-color),
     0 0 8px var(--primary-color);
+   
+}
+.scroll-cue {
+  position: fixed;
+  left: 24px;
+  right: 24px;
+  bottom:50px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 2.5rem;
+  color: var(--accent-color);
+  text-shadow:
+    0 0 6px var(--arrow-glow),
+    0 0 12px var(--arrow-glow),
+    0 0 18px var(--arrow-glow);
+  z-index: 4;
+  cursor: default;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
+.scroll-cue span {
+  display: inline-block;
+  transform: translateY(0);
+  animation: pulse-down 1.5s infinite ease-in-out;
+}
 
+@keyframes pulse-down {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
+.scroll-cue-hidden {
+  opacity:0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.front-hr {
+  margin:20px auto;
+  width: auto;
+  flex-shrink: 1;
+}
+@media (max-width: 768px) {
+  .image-slide:not(.center):not(.adjacent) {
+    display: none !important;
+
+  .content-wrapper {
+    padding: 0 16px;
+    max-width: 100%;
+  }
+  }
+  .cassette-header,
+  .page-footer {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  h1 {
+    text-align: center;
+  }
+}
+
+.image-slide.dummy {
+  flex: 0 0 300px;
+  width: 300px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}
+.side-a,
+.side-b,
+.content-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin: 0 auto;
+}

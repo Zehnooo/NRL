@@ -39,7 +39,7 @@ function centerActiveSlide() {
 
 songImages = document.querySelectorAll('.image-slide');
 
-activeIndex = 2;
+activeIndex = 3;
 
 
   function classUpdate(activeIndex) {
@@ -65,23 +65,44 @@ songImages.forEach((img, i) => {
     });
 });
 
-classUpdate(2);
+classUpdate(3);
 window.scrollTo({ top: 0, behavior: 'smooth' });
 
 document.addEventListener("DOMContentLoaded", function () {
-  const flipButton = document.getElementById('flip-tape-button');
   const flipInner = document.querySelector('.flip-inner');
+  const flipA = document.getElementById('footer-a');
+  const flipB = document.getElementById('footer-b');
   const scrollers = document.getElementById('scroll-arrows');
 
-  flipButton.addEventListener('click', () => {
-    flipInner.classList.toggle('flipped');
-    scrollers.classList.add('scroll-cue-hidden');
+  const flipBtnA = document.getElementById('flip-a');
+  const flipBtnB = document.getElementById('flip-b');
 
+  function flipCassette() {
+    flipInner.classList.toggle('flipped');
+
+    // Toggle footer visibility
+    if (flipA.style.display !== 'none') {
+      flipA.style.display = 'none';
+      flipB.style.display = 'block';
+    } else {
+      flipA.style.display = 'block';
+      flipB.style.display = 'none';
+    }
+
+    // Hide scroll arrows briefly
+    scrollers.classList.add('scroll-cue-hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-
-    setTimeout(()=> {
+    setTimeout(() => {
       scrollers.classList.remove('scroll-cue-hidden');
-    },1000);
-    });
-  });
+    }, 1000);
+  }
+
+  // Bind click handlers to the inner divs only
+  flipBtnA.addEventListener('click', flipCassette);
+  flipBtnB.addEventListener('click', flipCassette);
+
+  // Initial state
+  flipA.style.display = 'block';
+  flipB.style.display = 'none';
+});
